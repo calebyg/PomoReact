@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/pomo-react/static/css/main.ce0cb16c.css",
+    "main.js": "/pomo-react/static/js/main.785bff9c.js",
+    "static/js/787.11ad7805.chunk.js": "/pomo-react/static/js/787.11ad7805.chunk.js",
+    "index.html": "/pomo-react/index.html",
+    "main.ce0cb16c.css.map": "/pomo-react/static/css/main.ce0cb16c.css.map",
+    "main.785bff9c.js.map": "/pomo-react/static/js/main.785bff9c.js.map",
+    "787.11ad7805.chunk.js.map": "/pomo-react/static/js/787.11ad7805.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.ce0cb16c.css",
+    "static/js/main.785bff9c.js"
+  ]
+}
