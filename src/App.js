@@ -1,25 +1,65 @@
-import logo from './logo.svg';
-import './App.css';
+import { useRef, useState } from "react";
+import "./App.css";
+import PomoBreak from "./components/PomoBreak";
+import PomoSession from "./components/PomoSession";
+import PomoTimer from "./components/PomoTimer";
 
-function App() {
+const App = () => {
+  const [timerMinute, setTimerMinute] = useState(25);
+  const [sessionLength, setSessionLength] = useState(25);
+  const [breakLength, setBreakLength] = useState(5);
+  const [isAutoCycle, setIsAutoCycle] = useState(false);
+
+  const onBreakIntervalChange = (newBreakLength) => {
+    setBreakLength(newBreakLength);
+  };
+
+  const onSessionIntervalChange = (newSessionLength) => {
+    setSessionLength(newSessionLength);
+    setTimerMinute(newSessionLength);
+  };
+
+  const onTimerMinuteChange = (minuteChange) => {
+    setTimerMinute(minuteChange);
+  };
+
+  const onResetTimer = () => {
+    setSessionLength(25);
+    setTimerMinute(25);
+    setBreakLength(5);
+  };
+
+  const onCycleChange = (event) => {
+    if (event.target.checked === true) setIsAutoCycle(true);
+    else setIsAutoCycle(false);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main>
+      <h2>Pomodoro Clock</h2>
+      {/* <PomoSettings /> */}
+      <label>Auto cycle?</label>
+      <input type="checkbox" onClick={onCycleChange} />
+      <section>
+        <PomoSession
+          onSessionIntervalChange={onSessionIntervalChange}
+          sessionInterval={sessionLength}
+        />
+        <PomoBreak
+          onBreakIntervalChange={onBreakIntervalChange}
+          breakInterval={breakLength}
+        />
+      </section>
+      <PomoTimer
+        sessionInterval={sessionLength}
+        breakInterval={breakLength}
+        timerMinute={timerMinute}
+        onTimerMinuteChange={onTimerMinuteChange}
+        resetTimer={onResetTimer}
+        isAutoCycle={isAutoCycle}
+      />
+    </main>
   );
-}
+};
 
 export default App;
