@@ -1,4 +1,4 @@
-# Pomodoro Clock
+# PomoReact
 
 A Pomodoro timer is a studying technique used to dedicate an interval of time to study and take a break. The conventional
 starting period is 25 minutes to study, with a rewarded 5 minute break. After four completed study sessions, the student is
