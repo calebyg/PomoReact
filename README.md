@@ -9,6 +9,7 @@ You can find the project here: https://computeh.github.io/PomoReact/
 
 ## Components
 `PomoSettings` - Receives user input for timer customization then sends it to parent component.
+
 `PomoTimer` - Displays timer information.
 
 ## Hooks
