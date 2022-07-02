@@ -17,21 +17,36 @@
   margin: 0 20px;
 }
 
+.settings-container {
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 12px;
+  align-items: center;
+}
+
+input[type="number"] {
+  width: 50px;
+}
+
 h2 {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: 400;
+  margin-bottom: 10px;
 }
 
 h4 {
   text-align: center;
   font-size: 2rem;
   font-weight: 400;
+  margin-bottom: 10px;
 }
 
 .interval-length {
   font-size: 2rem;
   margin: 0 10px;
 }
+
 button {
   padding: 5px 12px;
   margin: 0 10px;
@@ -43,6 +58,13 @@ button {
   color: #eee;
 }
 
+button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  cursor: auto;
+}
 
 .timer-container {
   text-align: center;
