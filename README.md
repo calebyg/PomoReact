@@ -5,6 +5,7 @@ starting period is 25 minutes to study, with a rewarded 5 minute break. After fo
 rewarded with a longer, 15 minute break.
 
 My React project PomoReact allows users to specify study and break periods as well as the cycle between events.
+
 You can find the project here: https://computeh.github.io/PomoReact/
 
 ## Components
