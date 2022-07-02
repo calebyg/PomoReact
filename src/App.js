@@ -17,7 +17,7 @@ const App = () => {
   const onSessionIntervalChange = (newSessionLength) => {
     setSessionLength(newSessionLength);
     setTimerMinute(newSessionLength);
-  };
+  };  
 
   const onTimerMinuteChange = (minuteChange) => {
     setTimerMinute(minuteChange);
@@ -35,12 +35,12 @@ const App = () => {
   };
 
   return (
-    <main>
+    <main className="main-container">
       <h2>Pomodoro Clock</h2>
       {/* <PomoSettings /> */}
       <label>Auto cycle?</label>
       <input type="checkbox" onClick={onCycleChange} />
-      <section>
+      <section className="interval-length-container">
         <PomoSession
           onSessionIntervalChange={onSessionIntervalChange}
           sessionInterval={sessionLength}

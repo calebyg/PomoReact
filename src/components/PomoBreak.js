@@ -18,7 +18,7 @@ const PomoBreak = (props) => {
       <h4>Break Length</h4>
       <section className="section-container">
         <button onClick={decreaseBreakInterval}>Down</button>
-        <p>{props.breakInterval}</p>
+        <p className="interval-length">{props.breakInterval}</p>
         <button onClick={increaseBreakInterval}>Up</button>
       </section>
     </section>

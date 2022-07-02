@@ -21,7 +21,7 @@ const PomoSession = (props) => {
       <h4>Session Length</h4>
       <section className="section-container">
         <button onClick={decreaseSessionTimer}>Down</button>
-        <p>{props.sessionInterval}</p>
+        <p className="interval-length">{props.sessionInterval}</p>
         <button onClick={increaseSessionTimer}>Up</button>
       </section>
     </section>
