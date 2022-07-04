@@ -1,30 +1,45 @@
+import { nanoid } from "nanoid";
 import { useRef, useState } from "react";
 import "./App.css";
 import PomoSettings from "./components/PomoSettings";
 import PomoTimer from "./components/PomoTimer";
+import SessionLogList from "./components/SessionLogList";
 
 const App = () => {
   const [timerMinute, setTimerMinute] = useState(25);
   const [sessionLength, setSessionLength] = useState(25);
   const [breakLength, setBreakLength] = useState(5);
   const [longBreakLength, setLongBreakLength] = useState(15);
+  const [longBreakInterval, setLongBreakInterval] = useState(4);
   const [isAutoCycle, setIsAutoCycle] = useState(false);
+  const [sessionLogList, setSessionLogList] = useState([]);
 
-  const onSessionIntervalChange = (newSessionLength) => {
+  const onSessionLengthChange = (newSessionLength) => {
     setSessionLength(newSessionLength);
     setTimerMinute(newSessionLength);
   };
 
-  const onBreakIntervalChange = (newBreakLength) => {
+  const onBreakLengthChange = (newBreakLength) => {
     setBreakLength(newBreakLength);
   };
 
-  const onLongBreakIntervalChange = (newLongBreakLength) => {
+  const onLongBreakLengthChange = (newLongBreakLength) => {
     setLongBreakLength(newLongBreakLength);
+  };
+
+  const onLongBreakIntervalChange = (newLongBreakInterval) => {
+    setLongBreakInterval(newLongBreakInterval);
   };
 
   const onTimerMinuteChange = (minuteChange) => {
     setTimerMinute(minuteChange);
+  };
+
+  const onSessionLogChange = (taskName) => {
+    setSessionLogList((sessionLogList) => [
+      ...sessionLogList,
+      { id: nanoid(), taskName: taskName, timerMinute: sessionLength },
+    ]);
   };
 
   const onResetTimer = () => {
@@ -42,13 +57,13 @@ const App = () => {
     <main className="main-container">
       <h2>Pomodoro Clock</h2>
       <PomoSettings
-        onSessionIntervalChange={onSessionIntervalChange}
-        onBreakIntervalChange={onBreakIntervalChange}
-        onLongBreakIntervalChange={onLongBreakIntervalChange}
+        onSessionLengthChange={onSessionLengthChange}
+        onBreakLengthChange={onBreakLengthChange}
+        onLongBreakLengthChange={onLongBreakLengthChange}
         onAutoCycleChange={onAutoCycleChange}
+        onLongBreakIntervalChange={onLongBreakIntervalChange}
       />
-      <section className="interval-length-container">
-      </section>
+      <section className="interval-length-container"></section>
       <PomoTimer
         sessionInterval={sessionLength}
         breakInterval={breakLength}
@@ -56,7 +71,9 @@ const App = () => {
         onTimerMinuteChange={onTimerMinuteChange}
         resetTimer={onResetTimer}
         isAutoCycle={isAutoCycle}
+        onSessionLogChange={onSessionLogChange}
       />
+      <SessionLogList data={sessionLogList} />
     </main>
   );
 };

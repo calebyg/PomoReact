@@ -6,6 +6,7 @@ const PomoTimer = (props) => {
   const [isRunning, setIsRunning] = useState(false);
   const [isSession, setIsSession] = useState(true);
   const [sessionCount, setSessionCount] = useState(0);
+  const [taskName, setTaskName] = useState("");
 
   useInterval(
     () => {
@@ -33,6 +34,7 @@ const PomoTimer = (props) => {
           if (isSession) {
             setIsSession(false);
             props.onTimerMinuteChange(props.breakInterval);
+            props.onSessionLogChange(taskName);
             if (props.isAutoCycle !== true) {
               setIsRunning(false);
             }
@@ -65,6 +67,10 @@ const PomoTimer = (props) => {
     setSeconds(0);
   };
 
+  const taskNameHandler = (event) => {
+    setTaskName(event.target.value);
+  };
+
   return (
     <section>
       <h4>{isSession ? "Time to focus!" : "Time for a break!"}</h4>
@@ -80,8 +86,9 @@ const PomoTimer = (props) => {
         <button onClick={stopTimer}>Stop</button>
         <button onClick={resetTimer}>Refresh</button>
       </section>
-      <section>
-        <h4>Session #{sessionCount}</h4>
+      <section disabled={true}>
+        <label>Task name:</label>
+        <input type="text" onChange={taskNameHandler} disabled={isRunning} />
       </section>
     </section>
   );
