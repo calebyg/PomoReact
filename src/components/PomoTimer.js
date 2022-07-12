@@ -5,21 +5,17 @@ const PomoTimer = (props) => {
   const [seconds, setSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
   const [isSession, setIsSession] = useState(true);
-  const [sessionCount, setSessionCount] = useState(0);
   const [taskName, setTaskName] = useState("");
 
   useInterval(
     () => {
       decreaseTimer();
     },
-    isRunning ? 1000 : null
+    isRunning ? 100 : null
   );
 
   const startTimer = () => {
     setIsRunning(true);
-    if (isSession) {
-      setSessionCount((sessionCount) => sessionCount + 1);
-    }
   };
 
   const stopTimer = () => {
@@ -40,8 +36,8 @@ const PomoTimer = (props) => {
             }
           } else {
             // Break completed
+            props.onSessionCountUpdate();
             setIsSession(true);
-            setSessionCount((sessionCount) => sessionCount + 1);
             props.onTimerMinuteChange(props.sessionInterval);
             if (props.isAutoCycle !== true) {
               setIsRunning(false);
@@ -74,6 +70,7 @@ const PomoTimer = (props) => {
   return (
     <section>
       <h4>{isSession ? "Time to focus!" : "Time for a break!"}</h4>
+      <h4>Current session: #{props.sessionCount}</h4>
       <section className="timer-container">
         <span>{props.timerMinute}</span>
         <span>:</span>

@@ -10,6 +10,7 @@ const App = () => {
   const [sessionLength, setSessionLength] = useState(25);
   const [breakLength, setBreakLength] = useState(5);
   const [longBreakLength, setLongBreakLength] = useState(15);
+  const [sessionCount, setSessionCount] = useState(1);
   const [longBreakInterval, setLongBreakInterval] = useState(4);
   const [isAutoCycle, setIsAutoCycle] = useState(false);
   const [sessionLogList, setSessionLogList] = useState([]);
@@ -33,6 +34,10 @@ const App = () => {
 
   const onTimerMinuteChange = (minuteChange) => {
     setTimerMinute(minuteChange);
+  };
+
+  const onSessionCountUpdate = () => {
+    setSessionCount((sessionCount) => sessionCount + 1);
   };
 
   const onSessionLogChange = (taskName) => {
@@ -66,12 +71,18 @@ const App = () => {
       <section className="interval-length-container"></section>
       <PomoTimer
         sessionInterval={sessionLength}
-        breakInterval={breakLength}
+        breakInterval={
+          sessionCount > 1 && sessionCount % longBreakInterval === 0
+            ? longBreakLength
+            : breakLength
+        }
         timerMinute={timerMinute}
         onTimerMinuteChange={onTimerMinuteChange}
         resetTimer={onResetTimer}
         isAutoCycle={isAutoCycle}
         onSessionLogChange={onSessionLogChange}
+        sessionCount={sessionCount}
+        onSessionCountUpdate={onSessionCountUpdate}
       />
       <SessionLogList data={sessionLogList} />
     </main>

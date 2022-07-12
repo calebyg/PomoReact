@@ -42,7 +42,7 @@ const PomoSettings = (props) => {
     props.onSessionLengthChange(pomodoroTime);
     props.onBreakLengthChange(shortBreakTime);
     props.onLongBreakLengthChange(longBreakTime);
-    props.onlongBreakIntervalChange(longBreakInterval);
+    props.onLongBreakIntervalChange(longBreakInterval);
   };
 
   return (
