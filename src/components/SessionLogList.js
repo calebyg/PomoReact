@@ -2,7 +2,8 @@ import SessionLog from "./SessionLog";
 const SessionLogList = (props) => {
   const session_log_data = props.data;
   return (
-    <ul>
+    <section className="session-list-container">
+      <h4>Session Logs</h4>
       {session_log_data.map((session) => (
         <li key={session.id}>
           <SessionLog
@@ -11,7 +12,7 @@ const SessionLogList = (props) => {
           />
         </li>
       ))}
-    </ul>
+    </section>
   );
 };
 

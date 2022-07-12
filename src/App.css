@@ -73,3 +73,26 @@ button[disabled] {
   margin-top: 20px;
   margin-bottom: 20px;
 }
+
+.session-log-container {
+  padding: 20px;
+  text-align: center;
+  border-bottom: solid black;
+}
+
+.session-log-container > h2 {
+  font-size: 12px;
+  font-style: italic;
+  color: lightslategray;
+}
+
+.session-list-container {
+  width: 250px;
+  border-style: solid;
+  border-radius: 8px;
+  border-color: #263646;
+}
+
+.session-list-container > li {
+  list-style: none;
+}

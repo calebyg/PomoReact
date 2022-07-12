@@ -1,10 +1,8 @@
 const SessionLog = (props) => {
   return (
-    <section>
-      <h4>Task Name:</h4>
-      {props.taskName}
-      <h4>Pomodoro Time:</h4>
-      {props.timerMinute}
+    <section className="session-log-container">
+      <h2>Task Name: {props.taskName}</h2>
+      <h2>Pomodoro Time: {props.timerMinute}:00</h2>
     </section>
   );
 };
