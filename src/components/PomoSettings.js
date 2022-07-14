@@ -48,23 +48,24 @@ const PomoSettings = (props) => {
   return (
     <section className="settings-container">
       <h4>Settings</h4>
-      <section>
+      <section className="settings-sub-container">
+        <label>Pomodoro</label>
+        <label>Short Break</label>
+        <label>Long Break</label>
+      </section>
+      <section className="settings-sub-container">
+        <input type="number" defaultValue="25" onChange={pomodoroHandler} />
+        <input type="number" defaultValue="5" onChange={shortBreakHandler} />
+        <input type="number" defaultValue="15" onChange={longBreakHandler} />
+      </section>
+      <section className="settings-sub-container">
+        <label>Long Break Interval</label>
+        <input type="number" defaultValue="4" onChange={longBreakIntervalHandler}/>
+      </section>
+      <section className="settings-sub-container">
         <label>Auto cycle?</label>
         <input ref={checkboxRef} type="checkbox" />
       </section>
-
-      <label>Pomodoro</label>
-      <input type="number" defaultValue="25" onChange={pomodoroHandler} />
-      <label>Short Break</label>
-      <input type="number" defaultValue="5" onChange={shortBreakHandler} />
-      <label>Long Break</label>
-      <input type="number" defaultValue="15" onChange={longBreakHandler} />
-      <label>Long Break Interval</label>
-      <input
-        type="number"
-        defaultValue="4"
-        onChange={longBreakIntervalHandler}
-      />
       <button
         className="submit-button"
         disabled={isDisabled}

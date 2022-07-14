@@ -18,15 +18,28 @@
 }
 
 .settings-container {
+  border-style: solid;
+  border-radius: 8px;
+  border-color: #263646;
+  padding: 10px;
+
   display: inline-flex;
   flex-wrap: wrap;
   flex-direction: column;
   gap: 12px;
+  /* align-items: center; */
+}
+
+.settings-sub-container {
+  display: inline-flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 15px;
   align-items: center;
 }
 
 input[type="number"] {
-  width: 50px;
+  width: 70px;
 }
 
 h2 {
@@ -77,7 +90,6 @@ button[disabled] {
 .session-log-container {
   padding: 20px;
   text-align: center;
-  border-bottom: solid black;
 }
 
 .session-log-container > h2 {

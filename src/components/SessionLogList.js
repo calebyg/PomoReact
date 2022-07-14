@@ -2,8 +2,9 @@ import SessionLog from "./SessionLog";
 const SessionLogList = (props) => {
   const session_log_data = props.data;
   return (
-    <section className="session-list-container">
-      <h4>Session Logs</h4>
+    <section
+      className="session-list-container"
+    >
       {session_log_data.map((session) => (
         <li key={session.id}>
           <SessionLog
