@@ -11,7 +11,7 @@ const PomoTimer = (props) => {
     () => {
       decreaseTimer();
     },
-    isRunning ? 1000 : null
+    isRunning ? 100 : null
   );
 
   const startTimer = () => {
@@ -68,24 +68,23 @@ const PomoTimer = (props) => {
   };
 
   return (
-    <section>
-      <h4>{isSession ? "Time to focus!" : "Time for a break!"}</h4>
-      <h4>Current session: #{props.sessionCount}</h4>
-      <section className="timer-container">
+    <section className="timer-container">
+      <section className="timer-clock-container">
         <span>{props.timerMinute}</span>
         <span>:</span>
         <span>
           {seconds === 0 ? "00" : seconds < 10 ? "0" + seconds : seconds}
         </span>
       </section>
+
+      <h4>#{props.sessionCount}</h4>
+      <h4>{isSession ? "Time to focus!" : "Time for a break!"}</h4>
+      <label>Task name:</label>
+      <input type="text" onChange={taskNameHandler} disabled={isRunning} />
       <section className="section-container">
         <button onClick={startTimer}>Play</button>
         <button onClick={stopTimer}>Stop</button>
         <button onClick={resetTimer}>Refresh</button>
-      </section>
-      <section disabled={true}>
-        <label>Task name:</label>
-        <input type="text" onChange={taskNameHandler} disabled={isRunning} />
       </section>
     </section>
   );
