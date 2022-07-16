@@ -1,12 +1,9 @@
 # PomoReact
 
-A Pomodoro is a study technique used to dedicate an interval of time to study and take a break. The conventional
-starting period for this method is 25 minutes to study, with a rewarded 5 minute break. After four completed study sessions, the student is
-rewarded with a longer, 15 minute break.
+The 'Pomodoro' study method involves a dedicated study period, followed by a break. I developed this project
+to enrich my understanding of React's compontent-based architecture and apply it to a technology I personally use.
 
-My React project PomoReact allows users to specify study and break periods as well as the cycle between events.
-
-You can find the project here: https://computeh.github.io/PomoReact/
+You can use PomoReact [here](https://computeh.github.io/PomoReact/)
 
 ## Components
 
