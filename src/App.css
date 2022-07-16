@@ -22,12 +22,11 @@
   border-radius: 8px;
   border-color: #263646;
   padding: 10px;
-
   display: inline-flex;
   flex-wrap: wrap;
   flex-direction: column;
+  margin-top: 15px;
   gap: 12px;
-  /* align-items: center; */
 }
 
 .settings-sub-container {
@@ -80,15 +79,16 @@ button[disabled] {
 }
 
 .timer-container {
-  border-style: solid;
-  border-radius: 8px;
-  border-color: #263646;
-  background-color: #263646;
+  width: 260px;
+  height: 300px;
   display: inline-flex;
   flex-wrap: wrap;
   flex-direction: column;
   align-items: center;
-  border-style: solid black;
+  border-style: solid;
+  border-radius: 8px;
+  border-color: #263646;
+  background-color: #263646;
 }
 
 .timer-container > * {

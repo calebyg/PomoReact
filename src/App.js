@@ -68,7 +68,6 @@ const App = () => {
         onAutoCycleChange={onAutoCycleChange}
         onLongBreakIntervalChange={onLongBreakIntervalChange}
       />
-      <section className="interval-length-container"></section>
       <PomoTimer
         sessionInterval={sessionLength}
         breakInterval={

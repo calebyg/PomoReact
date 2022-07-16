@@ -11,7 +11,7 @@ const PomoTimer = (props) => {
     () => {
       decreaseTimer();
     },
-    isRunning ? 100 : null
+    isRunning ? 1000 : null
   );
 
   const startTimer = () => {
