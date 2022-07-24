@@ -14,6 +14,7 @@ const App = () => {
   const [longBreakInterval, setLongBreakInterval] = useState(4);
   const [isAutoCycle, setIsAutoCycle] = useState(false);
   const [sessionLogList, setSessionLogList] = useState([]);
+  const [isRunning, setIsRunning] = useState(false);
 
   const onSessionLengthChange = (newSessionLength) => {
     setSessionLength(newSessionLength);
@@ -58,6 +59,10 @@ const App = () => {
     setIsAutoCycle(newAutoCycle);
   };
 
+  const onRunningChange = (newRunning) => {
+    setIsRunning(newRunning);
+  }
+
   return (
     <main className="main-container">
       <h2>Pomodoro Clock</h2>
@@ -67,6 +72,7 @@ const App = () => {
         onLongBreakLengthChange={onLongBreakLengthChange}
         onAutoCycleChange={onAutoCycleChange}
         onLongBreakIntervalChange={onLongBreakIntervalChange}
+        isRunning={isRunning}
       />
       <PomoTimer
         sessionInterval={sessionLength}
@@ -82,6 +88,7 @@ const App = () => {
         onSessionLogChange={onSessionLogChange}
         sessionCount={sessionCount}
         onSessionCountUpdate={onSessionCountUpdate}
+        onRunningChange={onRunningChange}
       />
       <SessionLogList data={sessionLogList} />
     </main>

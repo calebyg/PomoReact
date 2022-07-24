@@ -7,11 +7,14 @@ const PomoTimer = (props) => {
   const [isSession, setIsSession] = useState(true);
   const [taskName, setTaskName] = useState("");
 
+  useEffect(() => {
+    props.onRunningChange(isRunning);
+  }, [isRunning]);
   useInterval(
     () => {
       decreaseTimer();
     },
-    isRunning ? 1000 : null
+    isRunning ? 10 : null
   );
 
   const startTimer = () => {
@@ -76,9 +79,9 @@ const PomoTimer = (props) => {
           {seconds === 0 ? "00" : seconds < 10 ? "0" + seconds : seconds}
         </span>
       </section>
-
-      <h4>#{props.sessionCount}</h4>
       <h4>{isSession ? "Time to focus!" : "Time for a break!"}</h4>
+      <h4>#{props.sessionCount}</h4>
+
       <label>Task name:</label>
       <input type="text" onChange={taskNameHandler} disabled={isRunning} />
       <section className="section-container">
