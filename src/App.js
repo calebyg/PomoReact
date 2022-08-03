@@ -4,7 +4,7 @@ import "./App.css";
 import PomoSettings from "./components/PomoSettings";
 import PomoTimer from "./components/PomoTimer";
 import SessionLogList from "./components/SessionLogList";
-import SettingsContext from "./components/SettingsContext";
+import SettingsContext from "./hooks/SettingsContext";
 
 const App = () => {
   const [timerMinute, setTimerMinute] = useState(25);

@@ -1,6 +1,6 @@
 import { useRef, useEffect, useState, useContext } from "react";
-import BackButton from "./BackButton";
-import SettingsContext from "./SettingsContext";
+import BackButton from "../ui/BackButton";
+import SettingsContext from "../hooks/SettingsContext";
 
 /**
  * PomoSettings is a UI component that allows users to

@@ -19,3 +19,9 @@ You can use PomoReact [here](https://computeh.github.io/PomoReact/)
 
 `useInterval` - Updates a callback and delay in ms to calculate a function to perform, `tick()`. If the value
 for the delay is not equal to null, the interval will be constantly updated through `useEffect()`.
+
+`SettingsContext` - Contains "global state" for all settings information.
+
+## UI
+
+SVG styling for the buttons were found [here](https://heroicons.com/).

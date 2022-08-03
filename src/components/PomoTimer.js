@@ -2,10 +2,10 @@ import { useEffect, useContext, useState, useRef } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import useInterval from "../hooks/useInterval";
 import "react-circular-progressbar/dist/styles.css";
-import PlayButton from "./PlayButton";
-import PauseButton from "./PauseButton";
-import SettingsButton from "./SettingsButton";
-import SettingsContext from "./SettingsContext";
+import PlayButton from "../ui/PlayButton";
+import PauseButton from "../ui/PauseButton";
+import SettingsButton from "../ui/SettingsButton";
+import SettingsContext from "../hooks/SettingsContext";
 
 const red = "#f54e4e";
 const green = "#4aec8c";
@@ -24,7 +24,7 @@ const PomoTimer = (props) => {
     () => {
       decreaseTimer();
     },
-    isRunning ? 1000 : null
+    isRunning ? 100 : null
   );
 
   const totalSeconds =
@@ -81,10 +81,11 @@ const PomoTimer = (props) => {
           seconds === 0 ? "00" : seconds < 10 ? "0" + seconds : seconds
         }`}
         styles={buildStyles({
-          textColor: "#000000",
+          textColor: "#ffffff",
           pathColor: mode === "work" ? red : green,
           trailColor: "rgba(255, 255, 255, 2)",
         })}
+        
       />
       <h4>
         {mode === "work"
