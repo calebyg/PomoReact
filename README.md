@@ -5,9 +5,7 @@ to enrich my understanding of React's compontent-based architecture and apply it
 
 You can use PomoReact [here](https://computeh.github.io/PomoReact/)
 
-![pomo-1](https://user-images.githubusercontent.com/32976268/182532261-8acdbbe1-7353-4ee1-a5e3-a6bfe80f454d.png =250x250)
-
-![pomo-2](https://user-images.githubusercontent.com/32976268/182532310-f49fb6a5-4b7e-4e2a-97b2-075668149101.png =250x250)
+![pomo-1](https://user-images.githubusercontent.com/32976268/182532261-8acdbbe1-7353-4ee1-a5e3-a6bfe80f454d.png)
 
 ## Components
 
