@@ -1,53 +1,69 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useContext, useState, useRef } from "react";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import useInterval from "../hooks/useInterval";
+import "react-circular-progressbar/dist/styles.css";
+import PlayButton from "./PlayButton";
+import PauseButton from "./PauseButton";
+import SettingsButton from "./SettingsButton";
+import SettingsContext from "./SettingsContext";
+
+const red = "#f54e4e";
+const green = "#4aec8c";
 
 const PomoTimer = (props) => {
+  const settingsInfo = useContext(SettingsContext);
+
+  const [minutes, setMinutes] = useState(settingsInfo.workMinutes);
   const [seconds, setSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [isSession, setIsSession] = useState(true);
-  const [taskName, setTaskName] = useState("");
+  const [mode, setMode] = useState("work"); // modes: 'work', 'short-break', 'long-break'
+  const [sessionCount, setSessionCount] = useState(1);
+  // const [taskName, setTaskName] = useState("");
 
-  useEffect(() => {
-    props.onRunningChange(isRunning);
-  }, [isRunning]);
   useInterval(
     () => {
       decreaseTimer();
     },
-    isRunning ? 10 : null
+    isRunning ? 1000 : null
   );
 
-  const startTimer = () => {
-    setIsRunning(true);
-  };
+  const totalSeconds =
+    mode === "work"
+      ? settingsInfo.workMinutes * 60
+      : mode === "short-break"
+      ? settingsInfo.shortBreakMinutes * 60
+      : settingsInfo.longBreakMinutes * 60;
 
-  const stopTimer = () => {
-    setIsRunning(false);
-  };
+  const percentage = Math.round(
+    ((minutes * 60 + seconds) / totalSeconds) * 100
+  );
 
   const decreaseTimer = () => {
     switch (seconds) {
       case 0:
-        if (props.timerMinute === 0) {
+        if (minutes === 0) {
           // Session completed
-          if (isSession) {
-            setIsSession(false);
-            props.onTimerMinuteChange(props.breakInterval);
-            props.onSessionLogChange(taskName);
-            if (props.isAutoCycle !== true) {
-              setIsRunning(false);
+          if (mode === "work") {
+            if (sessionCount % settingsInfo.longBreakInterval === 0) {
+              setMode("long-break");
+              setMinutes(settingsInfo.longBreakMinutes);
+            } else {
+              setMode("short-break");
+              setMinutes(settingsInfo.shortBreakMinutes);
             }
-          } else {
-            // Break completed
-            props.onSessionCountUpdate();
-            setIsSession(true);
-            props.onTimerMinuteChange(props.sessionInterval);
-            if (props.isAutoCycle !== true) {
-              setIsRunning(false);
-            }
+            // props.onSessionLogChange(taskName);
           }
+          // Break completed
+          else {
+            setMode("work");
+            setMinutes(settingsInfo.workMinutes);
+
+            setSessionCount((sessionCount) => sessionCount + 1);
+          }
+
+          if (settingsInfo.isAutoCycle === false) setIsRunning(false);
         } else {
-          props.onTimerMinuteChange(props.timerMinute - 1);
+          setMinutes((minutes) => minutes - 1);
           setSeconds(59);
         }
         break;
@@ -57,38 +73,37 @@ const PomoTimer = (props) => {
     }
   };
 
-  const resetTimer = () => {
-    setIsRunning(false);
-
-    props.resetTimer();
-
-    setIsSession(true);
-    setSeconds(0);
-  };
-
-  const taskNameHandler = (event) => {
-    setTaskName(event.target.value);
-  };
-
   return (
     <section className="timer-container">
-      <section className="timer-clock-container">
-        <span>{props.timerMinute}</span>
-        <span>:</span>
-        <span>
-          {seconds === 0 ? "00" : seconds < 10 ? "0" + seconds : seconds}
-        </span>
-      </section>
-      <h4>{isSession ? "Time to focus!" : "Time for a break!"}</h4>
+      <CircularProgressbar
+        value={percentage}
+        text={`${minutes}:${
+          seconds === 0 ? "00" : seconds < 10 ? "0" + seconds : seconds
+        }`}
+        styles={buildStyles({
+          textColor: "#000000",
+          pathColor: mode === "work" ? red : green,
+          trailColor: "rgba(255, 255, 255, 2)",
+        })}
+      />
+      <h4>
+        {mode === "work"
+          ? "Time to focus!"
+          : mode === "short-break"
+          ? "Time for a short break!"
+          : "Time for a long break!"}
+      </h4>
       <h4>#{props.sessionCount}</h4>
-
-      <label>Task name:</label>
-      <input type="text" onChange={taskNameHandler} disabled={isRunning} />
-      <section className="section-container">
-        <button onClick={startTimer}>Play</button>
-        <button onClick={stopTimer}>Stop</button>
-        <button onClick={resetTimer}>Refresh</button>
-      </section>
+      <div>
+        {isRunning ? (
+          <PauseButton onClick={() => setIsRunning(false)} />
+        ) : (
+          <PlayButton onClick={() => setIsRunning(true)} />
+        )}
+      </div>
+      <div style={{ marginTop: "20px" }}>
+        <SettingsButton onClick={() => settingsInfo.setShowSettings(true)} />
+      </div>
     </section>
   );
 };
