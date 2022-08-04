@@ -21,12 +21,19 @@
 .settings-container {
   border-style: solid;
   border-radius: 8px;
-  border-color: #263646;
+  border-color: transparent;
+  background-color: silver;
+  
   padding: 10px;
   display: inline-flex;
   flex-wrap: wrap;
   flex-direction: column;
   gap: 12px;
+}
+
+.settings-container > * {
+  color: #000000;
+  margin: 10px 0px;
 }
 
 .settings-container-disabled {
@@ -48,6 +55,13 @@
   flex-direction: row;
   gap: 15px;
   align-items: center;
+  border-bottom: solid lightslategray;
+  border-bottom-width: 2px;
+  
+}
+
+.settings-sub-container > * {
+  margin: 10px 0px;
 }
 
 input[type="number"] {

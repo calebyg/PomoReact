@@ -14,8 +14,8 @@ const PomoSettings = (props) => {
   const defaultLongBreakTime = 15;
   const defaultLongBreakInterval = 4;
 
-  const checkboxRef = useRef();
-  const clickRef = useRef();
+  const autoBreakRef = useRef();
+  const autoPomodoroRef = useRef();
   const pomoRef = useRef();
   const shortBreakRef = useRef();
   const longBreakRef = useRef();
@@ -56,23 +56,21 @@ const PomoSettings = (props) => {
     settingsInfo.setShortBreakMinutes(shortBreakRef.current.value);
     settingsInfo.setLongBreakMinutes(longBreakRef.current.value);
     settingsInfo.setLongBreakInterval(longBreakIntervalRef.current.value);
-    settingsInfo.setIsAutoCycle(checkboxRef.current.value);
+    settingsInfo.setIsAutoBreak(autoBreakRef.current.checked);
+    settingsInfo.setIsAutoPomodoro(autoPomodoroRef.current.checked);
     settingsInfo.setShowSettings(false);
   };
 
   return (
-    <section
-      className={
-        props.isRunning ? "settings-container-disabled" : "settings-container"
-      }
-      ref={clickRef}
-    >
-      <h4>Settings</h4>
+    <section className="settings-container">
+      <h2>Timer Setting</h2>
+      <h4>Time(minutes)</h4>
       <section className="settings-sub-container">
         <label>Pomodoro</label>
         <label>Short Break</label>
         <label>Long Break</label>
       </section>
+
       <section className="settings-sub-container">
         <input
           type="number"
@@ -94,6 +92,14 @@ const PomoSettings = (props) => {
         />
       </section>
       <section className="settings-sub-container">
+        <label>Auto start breaks?</label>
+        <input ref={autoBreakRef} type="checkbox" />
+      </section>
+      <section className="settings-sub-container">
+        <label>Auto start pomodoros?</label>
+        <input ref={autoPomodoroRef} type="checkbox" />
+      </section>
+      <section className="settings-sub-container">
         <label>Long Break Interval</label>
         <input
           type="number"
@@ -102,10 +108,7 @@ const PomoSettings = (props) => {
           onChange={longBreakIntervalHandler}
         />
       </section>
-      <section className="settings-sub-container">
-        <label>Auto cycle?</label>
-        <input ref={checkboxRef} type="checkbox" />
-      </section>
+
       <div style={{ textAlign: "center", marginTop: "20px" }}>
         <BackButton onClick={backButtonHandler} />
       </div>

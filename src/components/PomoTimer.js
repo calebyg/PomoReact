@@ -9,6 +9,7 @@ import SettingsContext from "../hooks/SettingsContext";
 
 const red = "#f54e4e";
 const green = "#4aec8c";
+const dark_orange = "#ff8c00";
 
 const PomoTimer = (props) => {
   const settingsInfo = useContext(SettingsContext);
@@ -24,7 +25,7 @@ const PomoTimer = (props) => {
     () => {
       decreaseTimer();
     },
-    isRunning ? 100 : null
+    isRunning ? 1000 : null
   );
 
   const totalSeconds =
@@ -52,6 +53,7 @@ const PomoTimer = (props) => {
               setMinutes(settingsInfo.shortBreakMinutes);
             }
             // props.onSessionLogChange(taskName);
+            if (!settingsInfo.isAutoBreak) setIsRunning(false);
           }
           // Break completed
           else {
@@ -59,9 +61,8 @@ const PomoTimer = (props) => {
             setMinutes(settingsInfo.workMinutes);
 
             setSessionCount((sessionCount) => sessionCount + 1);
+            if (!settingsInfo.isAutoPomodoro) setIsRunning(false);
           }
-
-          if (settingsInfo.isAutoCycle === false) setIsRunning(false);
         } else {
           setMinutes((minutes) => minutes - 1);
           setSeconds(59);
@@ -82,10 +83,14 @@ const PomoTimer = (props) => {
         }`}
         styles={buildStyles({
           textColor: "#ffffff",
-          pathColor: mode === "work" ? red : green,
+          pathColor:
+            mode === "work"
+              ? red
+              : mode === "short-break"
+              ? green
+              : dark_orange,
           trailColor: "rgba(255, 255, 255, 2)",
         })}
-        
       />
       <h4>
         {mode === "work"
@@ -94,7 +99,7 @@ const PomoTimer = (props) => {
           ? "Time for a short break!"
           : "Time for a long break!"}
       </h4>
-      <h4>#{props.sessionCount}</h4>
+      <h4>#{sessionCount}</h4>
       <div>
         {isRunning ? (
           <PauseButton onClick={() => setIsRunning(false)} />
