@@ -58,7 +58,7 @@ const PomoSettings = (props) => {
     settingsInfo.setLongBreakInterval(longBreakIntervalRef.current.value);
     settingsInfo.setIsAutoBreak(autoBreakRef.current.checked);
     settingsInfo.setIsAutoPomodoro(autoPomodoroRef.current.checked);
-    settingsInfo.setShowSettings(false);
+    props.onShowSettingsChange(false);
   };
 
   return (

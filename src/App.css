@@ -93,6 +93,7 @@ button {
   border: 0;
   display: inline-block;
   width: 100px;
+  cursor: pointer;
 }
 
 button.with-label {

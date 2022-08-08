@@ -17,15 +17,14 @@ const PomoTimer = (props) => {
   const [minutes, setMinutes] = useState(settingsInfo.workMinutes);
   const [seconds, setSeconds] = useState(0);
   const [isRunning, setIsRunning] = useState(false);
-  const [mode, setMode] = useState("work"); // modes: 'work', 'short-break', 'long-break'
   const [sessionCount, setSessionCount] = useState(1);
-  // const [taskName, setTaskName] = useState("");
+  const [mode, setMode] = useState("work"); // 'work', 'short-break', 'long-break'
 
   useInterval(
     () => {
       decreaseTimer();
     },
-    isRunning ? 1000 : null
+    isRunning ? 100 : null
   );
 
   const totalSeconds =
@@ -52,8 +51,9 @@ const PomoTimer = (props) => {
               setMode("short-break");
               setMinutes(settingsInfo.shortBreakMinutes);
             }
-            // props.onSessionLogChange(taskName);
             if (!settingsInfo.isAutoBreak) setIsRunning(false);
+            // push new session to local storage data list
+            props.onUserDataChange(settingsInfo.workMinutes, "February");
           }
           // Break completed
           else {
@@ -106,9 +106,6 @@ const PomoTimer = (props) => {
         ) : (
           <PlayButton onClick={() => setIsRunning(true)} />
         )}
-      </div>
-      <div style={{ marginTop: "20px" }}>
-        <SettingsButton onClick={() => settingsInfo.setShowSettings(true)} />
       </div>
     </section>
   );
