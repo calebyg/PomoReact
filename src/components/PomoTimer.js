@@ -24,7 +24,7 @@ const PomoTimer = (props) => {
     () => {
       decreaseTimer();
     },
-    isRunning ? 100 : null
+    isRunning ? 1000 : null
   );
 
   const totalSeconds =
@@ -52,8 +52,11 @@ const PomoTimer = (props) => {
               setMinutes(settingsInfo.shortBreakMinutes);
             }
             if (!settingsInfo.isAutoBreak) setIsRunning(false);
-            // push new session to local storage data list
-            props.onUserDataChange(settingsInfo.workMinutes, "February");
+            // push completed session to local storage
+            const year = new Date().getFullYear();
+            const month = new Date().getMonth();
+            const day = new Date().getDay();
+            props.onUserDataChange(year, month, day);
           }
           // Break completed
           else {

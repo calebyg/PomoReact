@@ -1,13 +1,10 @@
-import { nanoid } from "nanoid";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 import PomoSettings from "./components/PomoSettings";
 import PomoTimer from "./components/PomoTimer";
 import SettingsButton from "./ui/SettingsButton";
 import ProgressButton from "./ui/ProgressButton";
 import SettingsContext from "./hooks/SettingsContext";
-import BarChart from "./components/LineChart";
-import PomoProgress from "./components/PomoProgress";
 import LineChart from "./components/LineChart";
 
 const App = () => {
@@ -19,14 +16,29 @@ const App = () => {
   const [shortBreakMinutes, setShortBreakMinutes] = useState(10);
   const [longBreakMinutes, setLongBreakMinutes] = useState(30);
   const [longBreakInterval, setLongBreakInterval] = useState(4);
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState({
+    yearData: 2022,
+    dayData: Array(7).fill(0),
+    monthData: Array(12).fill(0),
+  });
 
-  const onUserDataChange = (time, date) => {
-    setUserData((userData) => [
-      ...userData,
-      { sessionTime: time, sessionDate: date },
-    ]);
+  const onUserDataChange = (year, month, day) => {
+    const newDayData = Array.from(userData.dayData);
+    const newMonthData = Array.from(userData.monthData);
+    // update hours worked for month and day
+
+    newDayData[day]++;
+    newMonthData[month]++;
+
+    setUserData({
+      dayData: newDayData,
+      monthData: newMonthData,
+    });
   };
+
+  useEffect(() => {
+    console.log(userData);
+  }, [userData]);
 
   return (
     <main className="main-container">

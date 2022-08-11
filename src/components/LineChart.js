@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import { Bar, Line } from "react-chartjs-2";
 import { Chart as ChartJS } from "chart.js/auto";
 import BackButton from "../ui/BackButton";
@@ -10,49 +10,77 @@ import SettingsContext from "../hooks/SettingsContext";
  * @param {*} props
  * @returns
  */
-/* Ranges: 
-   Daily: From 12am - 11:59pm
-   Week:  From last Mon - Sun
-   Monthly: From first session's month to Dec 31 current year
-*/
+
+const dayLabels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const monthLabels = [
+  "Jan",
+  "Feb",
+  "Mar",
+  "Apr",
+  "May",
+  "Jun",
+  "Jul",
+  "Aug",
+  "Sept",
+  "Oct",
+  "Nov",
+  "Dec",
+];
 const LineChart = (props) => {
-  const days = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
-  const months = [
-    "Jan",
-    "Feb",
-    "Mar",
-    "Apr",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ];
-  const [userData, setUserData] = useState({
-    labels: ["12am", "12am"],
+  const myMonthData = props.chartData.monthData;
+  const myDayData = props.chartData.dayData;
+  const [chartInfo, setChartInfo] = useState({
+    labels: dayLabels,
     datasets: [
       {
-        label: "Hours worked",
-        data: props.chartData.map((data) => data.sessionTime),
+        label: "Sessions Completed",
+        data: myDayData,
         backgroundColor: "red",
         borderColor: "black",
         borderWidth: 2,
       },
     ],
   });
+
+  const onShowWeeklyHandler = () => {
+    setChartInfo({
+      labels: dayLabels,
+      datasets: [
+        {
+          label: "Sessions completed",
+          data: myDayData,
+          backgroundColor: "red",
+          borderColor: "black",
+          borderWidth: 2,
+        },
+      ],
+    });
+  };
+
+  const onShowMonthlyHandler = () => {
+    setChartInfo({
+      labels: monthLabels,
+      datasets: [
+        {
+          label: "Sessions completed",
+          data: myMonthData,
+          backgroundColor: "red",
+          borderColor: "black",
+          borderWidth: 2,
+        },
+      ],
+    });
+  };
+
   return (
     <section style={{ width: "700px" }}>
       <section>
-        <button onClick={() => setUserData({ labels: ["12am", "12am"] })}>
-          Daily
-        </button>
-        <button onClick={() => setUserData({ labels: days })}>Weekly</button>
-        <button onClick={() => setUserData({ labels: months })}>Monthly</button>
+        <h1>Progress</h1>
+        <h1>Current hours worked for {new Date().getDate()}:</h1>
+        <button onClick={onShowWeeklyHandler}>Weekly</button>
+        <button onClick={onShowMonthlyHandler}>Monthly</button>
       </section>
-      <Line data={userData} />
+      <Line data={chartInfo} />
       <BackButton onClick={() => props.onShowProgressChange(false)} />
     </section>
   );
