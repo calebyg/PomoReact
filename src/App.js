@@ -73,7 +73,9 @@ const App = () => {
           setIsAutoPomodoro,
         }}
       >
-        <h2>Pomodoro Clock</h2>
+        <h1>
+          {showSettings ? `Settings` : showProgress ? `Progress` : `PomoReact`}
+        </h1>
         {showSettings ? (
           <PomoSettings onShowSettingsChange={setShowSettings} />
         ) : showProgress ? (
@@ -84,9 +86,9 @@ const App = () => {
             />
           </div>
         ) : (
-          <section>
+          <section className="parent-timer-container">
             <PomoTimer onUserDataChange={onUserDataChange} />
-            <div style={{ marginTop: "20px" }}>
+            <div className="button-bar-container">
               <SettingsButton onClick={() => setShowSettings(true)} />
               <ProgressButton onClick={() => setShowProgress(true)} />
             </div>

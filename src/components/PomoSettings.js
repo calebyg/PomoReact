@@ -63,14 +63,12 @@ const PomoSettings = (props) => {
 
   return (
     <section className="settings-container">
-      <h2>Timer Setting</h2>
-      <h4>Time(minutes)</h4>
+      <h2>Timer Settings</h2>
       <section className="settings-sub-container">
-        <label>Pomodoro</label>
-        <label>Short Break</label>
-        <label>Long Break</label>
+        <h3>Pomodoro</h3>
+        <h3>Short Break</h3>
+        <h3>Long Break</h3>
       </section>
-
       <section className="settings-sub-container">
         <input
           type="number"
@@ -92,15 +90,15 @@ const PomoSettings = (props) => {
         />
       </section>
       <section className="settings-sub-container">
-        <label>Auto start breaks?</label>
+        <h3>Auto start breaks?</h3>
         <input ref={autoBreakRef} type="checkbox" />
       </section>
       <section className="settings-sub-container">
-        <label>Auto start pomodoros?</label>
+        <h3>Auto start pomodoros?</h3>
         <input ref={autoPomodoroRef} type="checkbox" />
       </section>
       <section className="settings-sub-container">
-        <label>Long Break Interval</label>
+        <h3>Long Break Interval</h3>
         <input
           type="number"
           defaultValue={settingsInfo.longBreakInterval}

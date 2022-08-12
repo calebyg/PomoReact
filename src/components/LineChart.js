@@ -35,8 +35,8 @@ const LineChart = (props) => {
       {
         label: "Sessions Completed",
         data: myDayData,
-        backgroundColor: "red",
-        borderColor: "black",
+        backgroundColor: "#f54e4e",
+        borderColor: "white",
         borderWidth: 2,
       },
     ],
@@ -47,10 +47,10 @@ const LineChart = (props) => {
       labels: dayLabels,
       datasets: [
         {
-          label: "Sessions completed",
+          label: "Sessions Completed",
           data: myDayData,
-          backgroundColor: "red",
-          borderColor: "black",
+          backgroundColor: "#f54e4e",
+          borderColor: "white",
           borderWidth: 2,
         },
       ],
@@ -62,10 +62,10 @@ const LineChart = (props) => {
       labels: monthLabels,
       datasets: [
         {
-          label: "Sessions completed",
-          data: myMonthData,
-          backgroundColor: "red",
-          borderColor: "black",
+          label: "Sessions Completed",
+          data: myDayData,
+          backgroundColor: "#f54e4e",
+          borderColor: "white",
           borderWidth: 2,
         },
       ],
@@ -73,9 +73,8 @@ const LineChart = (props) => {
   };
 
   return (
-    <section style={{ width: "700px" }}>
+    <section className="chart-container">
       <section>
-        <h1>Progress</h1>
         <button onClick={onShowWeeklyHandler}>Weekly</button>
         <button onClick={onShowMonthlyHandler}>Monthly</button>
       </section>

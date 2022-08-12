@@ -78,7 +78,7 @@ const PomoTimer = (props) => {
   };
 
   return (
-    <section className="timer-container">
+    <section>
       <CircularProgressbar
         value={percentage}
         text={`${minutes}:${
