@@ -76,7 +76,6 @@ const LineChart = (props) => {
     <section style={{ width: "700px" }}>
       <section>
         <h1>Progress</h1>
-        <h1>Current hours worked for {new Date().getDate()}:</h1>
         <button onClick={onShowWeeklyHandler}>Weekly</button>
         <button onClick={onShowMonthlyHandler}>Monthly</button>
       </section>

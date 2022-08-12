@@ -16,29 +16,44 @@ const App = () => {
   const [shortBreakMinutes, setShortBreakMinutes] = useState(10);
   const [longBreakMinutes, setLongBreakMinutes] = useState(30);
   const [longBreakInterval, setLongBreakInterval] = useState(4);
-  const [userData, setUserData] = useState({
-    yearData: 2022,
-    dayData: Array(7).fill(0),
-    monthData: Array(12).fill(0),
-  });
+  const [userData, setUserData] = useState({});
 
-  const onUserDataChange = (year, month, day) => {
+  const localStorage = window.localStorage;
+
+  // An empty dependencies array ensures this code
+  // runs only once - on initial load
+  useEffect(() => {
+    if (localStorage.length === 0) {
+      setUserData({
+        dayData: Array(7).fill(0),
+        monthData: Array(12).fill(0),
+      });
+    } else {
+      let savedUserData = JSON.parse(localStorage.getItem("2022-full-data"));
+      setUserData({
+        dayData: savedUserData.dayData,
+        monthData: savedUserData.monthData,
+      });
+    }
+  }, []);
+
+  const onUserDataChange = (month, day) => {
     const newDayData = Array.from(userData.dayData);
     const newMonthData = Array.from(userData.monthData);
-    // update hours worked for month and day
 
     newDayData[day]++;
     newMonthData[month]++;
+
+    localStorage.setItem(
+      "2022-full-data",
+      JSON.stringify({ dayData: newDayData, monthData: newMonthData })
+    );
 
     setUserData({
       dayData: newDayData,
       monthData: newMonthData,
     });
   };
-
-  useEffect(() => {
-    console.log(userData);
-  }, [userData]);
 
   return (
     <main className="main-container">

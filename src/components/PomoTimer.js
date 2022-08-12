@@ -42,7 +42,7 @@ const PomoTimer = (props) => {
     switch (seconds) {
       case 0:
         if (minutes === 0) {
-          // Session completed
+          // session completed
           if (mode === "work") {
             if (sessionCount % settingsInfo.longBreakInterval === 0) {
               setMode("long-break");
@@ -53,12 +53,12 @@ const PomoTimer = (props) => {
             }
             if (!settingsInfo.isAutoBreak) setIsRunning(false);
             // push completed session to local storage
-            const year = new Date().getFullYear();
             const month = new Date().getMonth();
             const day = new Date().getDay();
-            props.onUserDataChange(year, month, day);
+            props.onUserDataChange(month, day);
+            console.log(window.localStorage);
           }
-          // Break completed
+          // break completed
           else {
             setMode("work");
             setMinutes(settingsInfo.workMinutes);
