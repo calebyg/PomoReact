@@ -63,7 +63,7 @@ const LineChart = (props) => {
       datasets: [
         {
           label: "Sessions Completed",
-          data: myDayData,
+          data: myMonthData,
           backgroundColor: "#f54e4e",
           borderColor: "white",
           borderWidth: 2,
