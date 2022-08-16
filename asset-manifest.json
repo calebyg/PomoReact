@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/PomoReact/static/css/main.16c988ad.css",
-    "main.js": "/PomoReact/static/js/main.6ffb8c5f.js",
+    "main.js": "/PomoReact/static/js/main.9698d05f.js",
     "static/js/787.11ad7805.chunk.js": "/PomoReact/static/js/787.11ad7805.chunk.js",
     "index.html": "/PomoReact/index.html",
     "main.16c988ad.css.map": "/PomoReact/static/css/main.16c988ad.css.map",
-    "main.6ffb8c5f.js.map": "/PomoReact/static/js/main.6ffb8c5f.js.map",
+    "main.9698d05f.js.map": "/PomoReact/static/js/main.9698d05f.js.map",
     "787.11ad7805.chunk.js.map": "/PomoReact/static/js/787.11ad7805.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.16c988ad.css",
-    "static/js/main.6ffb8c5f.js"
+    "static/js/main.9698d05f.js"
   ]
 }
