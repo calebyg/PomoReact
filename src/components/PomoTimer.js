@@ -1,11 +1,10 @@
-import { useEffect, useContext, useState, useRef } from "react";
+import { useContext, useState } from "react";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import useInterval from "../hooks/useInterval";
-import "react-circular-progressbar/dist/styles.css";
 import PlayButton from "../ui/PlayButton";
 import PauseButton from "../ui/PauseButton";
-import SettingsButton from "../ui/SettingsButton";
 import SettingsContext from "../hooks/SettingsContext";
+import "react-circular-progressbar/dist/styles.css";
 
 const red = "#f54e4e";
 const green = "#4aec8c";
@@ -42,7 +41,7 @@ const PomoTimer = (props) => {
     switch (seconds) {
       case 0:
         if (minutes === 0) {
-          // session completed
+          /* SESSION COMPLETED */
           if (mode === "work") {
             if (sessionCount % settingsInfo.longBreakInterval === 0) {
               setMode("long-break");
@@ -52,14 +51,11 @@ const PomoTimer = (props) => {
               setMinutes(settingsInfo.shortBreakMinutes);
             }
             if (!settingsInfo.isAutoBreak) setIsRunning(false);
-            // push completed session to local storage
-            const month = new Date().getMonth();
-            const day = new Date().getDay();
-            props.onUserDataChange(month, day);
+            /* PUSH SESSION TO LOCAL STORAGE */
+            props.onUserDataChange();
             console.log(window.localStorage);
-          }
-          // break completed
-          else {
+          } else {
+            /* BREAK COMPLETED */
             setMode("work");
             setMinutes(settingsInfo.workMinutes);
 

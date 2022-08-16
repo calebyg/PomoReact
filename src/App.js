@@ -5,7 +5,7 @@ import PomoTimer from "./components/PomoTimer";
 import SettingsButton from "./ui/SettingsButton";
 import ProgressButton from "./ui/ProgressButton";
 import SettingsContext from "./hooks/SettingsContext";
-import LineChart from "./components/LineChart";
+import PomoProgress from "./components/PomoProgress";
 
 const App = () => {
   const [isAutoBreak, setIsAutoBreak] = useState(false);
@@ -18,6 +18,10 @@ const App = () => {
   const [longBreakInterval, setLongBreakInterval] = useState(4);
   const [userData, setUserData] = useState({});
 
+  let currentDate = new Date();
+  let startDate = new Date(currentDate.getFullYear(), 0, 1);
+  let days = Math.floor((currentDate - startDate) / (24 * 60 * 60 * 1000));
+  let week = Math.ceil(days / 7);
   const localStorage = window.localStorage;
 
   // An empty dependencies array ensures this code
@@ -25,34 +29,54 @@ const App = () => {
   useEffect(() => {
     if (localStorage.length === 0) {
       setUserData({
-        dayData: Array(7).fill(0),
+        dataYear: new Date().getFullYear(),
+        weekData: Array(52).fill(Array(7).fill(0)),
         monthData: Array(12).fill(0),
       });
     } else {
-      let savedUserData = JSON.parse(localStorage.getItem("2022-full-data"));
+      let savedUserData = JSON.parse(
+        localStorage.getItem(new Date().getFullYear() + "-full-data")
+      );
       setUserData({
-        dayData: savedUserData.dayData,
+        dataYear: new Date().getFullYear(),
+        weekData: savedUserData.weekData,
         monthData: savedUserData.monthData,
       });
     }
   }, []);
 
-  const onUserDataChange = (month, day) => {
-    const newDayData = Array.from(userData.dayData);
+  const onUserDataChange = () => {
+    const newWeekData = userData.weekData.map((arr) => arr.slice(0));
     const newMonthData = Array.from(userData.monthData);
 
-    newDayData[day]++;
-    newMonthData[month]++;
+    newWeekData[week][currentDate.getDay()]++;
+    newMonthData[currentDate.getMonth()]++;
+
+    let itemString = currentDate.getFullYear() + "-full-data";
 
     localStorage.setItem(
-      "2022-full-data",
-      JSON.stringify({ dayData: newDayData, monthData: newMonthData })
+      itemString,
+      JSON.stringify({ weekData: newWeekData, monthData: newMonthData })
     );
 
     setUserData({
-      dayData: newDayData,
+      dataYear: currentDate.getFullYear(),
+      weekData: newWeekData,
       monthData: newMonthData,
     });
+  };
+
+  const onClearAllUserData = () => {
+    let option = window.confirm("Clear all data?");
+    if (option) {
+      localStorage.clear();
+      setUserData({
+        dataYear: new Date().getFullYear(),
+        weekData: Array(52).fill(Array(7).fill(0)),
+        monthData: Array(12).fill(0),
+      });
+      window.location.reload(false);
+    }
   };
 
   return (
@@ -80,9 +104,11 @@ const App = () => {
           <PomoSettings onShowSettingsChange={setShowSettings} />
         ) : showProgress ? (
           <div>
-            <LineChart
+            <PomoProgress
               onShowProgressChange={setShowProgress}
+              onClearAllUserData={onClearAllUserData}
               chartData={userData}
+              currentWeek={week}
             />
           </div>
         ) : (
