@@ -3,7 +3,7 @@
 The 'Pomodoro' study method involves a dedicated study period, followed by a break. I developed this project
 to enrich my understanding of React's compontent-based architecture and apply it to a technology I personally use.
 
-You can use PomoReact [here](https://computeh.github.io/PomoReact/)
+You can use PomoReact [here](https://calebyg.github.io/PomoReact/)
 
 ## Components
 
